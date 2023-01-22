@@ -3,9 +3,11 @@ package com.example.springtutorial.service;
 import com.example.springtutorial.domain.Member;
 import com.example.springtutorial.repository.MemberRepository;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
+@Transactional
 public class MemberService {
     private final MemberRepository memberRepository;
 
