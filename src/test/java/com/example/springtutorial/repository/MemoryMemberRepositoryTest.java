@@ -1,24 +1,15 @@
 package com.example.springtutorial.repository;
 
 import com.example.springtutorial.domain.Member;
-import com.example.springtutorial.service.MemberService;
 import org.junit.Test;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 
 import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-public class MemoryMemberRepositoryTest {
-    MemberService memberService;
-    MemoryMemberRepository memberRepository;
-
-    @BeforeEach
-    public void beforeEach() {
-        memberRepository = new MemoryMemberRepository();
-        memberService = new MemberService(memberRepository);
-    }
+class MemoryMemberRepositoryTest {
+    MemoryMemberRepository repository = new MemoryMemberRepository();
 
     @AfterEach
     public void afterEach() {
@@ -31,11 +22,8 @@ public class MemoryMemberRepositoryTest {
         member.setName("spring");
 
         repository.save(member);
-
-
         Member result = repository.findById(member.getId()).get();
-        assertThat(result).isEqualTo(member);
-
+        assertThat(member).isEqualTo(result);
     }
 
     @Test
@@ -49,7 +37,6 @@ public class MemoryMemberRepositoryTest {
         repository.save(member2);
 
         Member result = repository.findByName("spring1").get();
-
         assertThat(result).isEqualTo(member1);
     }
 
@@ -64,9 +51,7 @@ public class MemoryMemberRepositoryTest {
         repository.save(member2);
 
         List<Member> result = repository.findAll();
-
         assertThat(result.size()).isEqualTo(2);
-
     }
 
 }
